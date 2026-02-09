@@ -262,10 +262,10 @@ export default function AirInstrument() {
     videoRef.current.srcObject = stream;
     await videoRef.current.play();
 
-    const { Hands } = await import('@mediapipe/hands');
-    const { Camera } = await import('@mediapipe/camera_utils');
+    const handsModule = await import('@mediapipe/hands');
+    const cameraModule = await import('@mediapipe/camera_utils');
 
-    const hands = new Hands({
+    const hands = new handsModule.Hands({
       locateFile: (file: string) =>
         `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
     });
@@ -279,7 +279,7 @@ export default function AirInstrument() {
 
     hands.onResults(onHandResults);
 
-    const camera = new Camera(videoRef.current, {
+    const camera = new cameraModule.Camera(videoRef.current, {
       onFrame: async () => {
         if (videoRef.current) {
           await hands.send({ image: videoRef.current });
