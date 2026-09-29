@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>3D Gaussian Splat Gallery</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 48px 20px 32px;
+        }
+
+        .header h1 { font-size: 2rem; font-weight: 600; margin-bottom: 8px; }
+        .header p { color: #8b949e; font-size: 1rem; }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 48px;
+        }
+
+        .card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #58a6ff;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-img-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: linear-gradient(135deg, #21262d 0%, #30363d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #484f58;
+        }
+
+        .card-body { padding: 16px; }
+        .card-body h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; }
+        .card-body p { color: #8b949e; font-size: 0.85rem; line-height: 1.4; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>3D Gaussian Splat Gallery</h1>
+    <p>Select a scene to explore with hand gestures</p>
+</div>
+
+<div class="gallery" id="gallery"></div>
+
+<script>
+    // Camera params: focal=x,y,z  angles=azimuth,elevation  distance=n
+    // Adjust these per scene to set the default camera view
+    const SCENES = [
+        { name: 'Minneapolis', description: 'Minneapolis, Minnesota', file: 'models/Minneapolis.ply', camera: 'focal=-6.994,-8.949,39.634&angles=175.1,-13.8&distance=0.003' },
+        { name: 'Bozeman', description: 'Bozeman, Montana', file: 'models/Bozeman.ply', camera: 'focal=0.228,2.708,3.592&angles=177.8,-11.9&distance=0.000' },
+        { name: 'Mendocino County', description: 'Mendocino County, California', file: 'models/Mendocino County.ply', camera: 'focal=0.537,0.453,2.161&angles=178.0,-3.2&distance=0.000' },
+        { name: 'Lemmon SD', description: 'Lemmon, South Dakota', file: 'models/Lemmon SD.ply', camera: 'focal=0.007,-0.783,2.957&angles=185.5,9.8&distance=0.002' },
+        { name: 'Red River Valley', description: 'Red River Valley', file: 'models/Red River Valley.ply', camera: 'focal=0.702,-0.543,11.770&angles=178.4,12.5&distance=0.006' },
+        { name: 'Grangeville', description: 'Grangeville, Idaho', file: 'models/Grangeville.ply', camera: 'focal=0.533,0.500,17.934&angles=178.9,-0.1&distance=0.003' },
+        { name: 'Klamath Lake', description: 'Klamath Lake, Oregon', file: 'models/Klamath Lake.ply', camera: 'focal=-0.233,0.637,3.142&angles=185.9,0.5&distance=0.006' },
+        { name: 'Mendocino County 2', description: 'Mendocino County, California', file: 'models/Mendocino County2.ply', camera: 'focal=0.537,0.453,2.161&angles=178.0,-3.2&distance=0.000' }
+    ];
+
+    const gallery = document.getElementById('gallery');
+
+    SCENES.forEach(scene => {
+        const card = document.createElement('a');
+        card.className = 'card';
+
+        const plyUrl = new URL(scene.file, window.location.href).href;
+        const cameraParams = scene.camera ? `&${scene.camera}` : '';
+        card.href = `editor/?load=${encodeURIComponent(plyUrl)}${cameraParams}`;
+
+        card.innerHTML = `
+            <div class="card-img-placeholder">&#9651;</div>
+            <div class="card-body">
+                <h3>${scene.name}</h3>
+                <p>${scene.description}</p>
+            </div>
+        `;
+
+        gallery.appendChild(card);
+    });
+</script>
+
+</body>
+</html>

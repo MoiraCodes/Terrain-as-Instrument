@@ -1,31 +1,27 @@
 {
   "name": "terrain-as-instrument",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Depth-tracked Gaussian splat terrain installation: Orbbec to OSC bridge, browser renderer, Max/MSP output",
+  "main": "osc-bridge.mjs",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "./start.sh",
+    "bridge": "node osc-bridge.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoiraCodes/Terrain-as-Instrument.git"
+  },
+  "keywords": [],
+  "author": "Moira (Fan) Zhang",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/MoiraCodes/Terrain-as-Instrument/issues"
+  },
+  "homepage": "https://github.com/MoiraCodes/Terrain-as-Instrument#readme",
+  "devDependencies": {
+    "puppeteer-core": "^24.42.0"
   },
   "dependencies": {
-    "@mediapipe/camera_utils": "^0.3.1675466862",
-    "@mediapipe/hands": "^0.4.1675469240",
-    "next": "^15.1.6",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "three": "^0.172.0"
-  },
-  "devDependencies": {
-    "@types/node": "^22.10.5",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
-    "@types/three": "^0.172.0",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^15.1.6",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.2"
+    "serialport": "^13.0.0"
   }
 }
