@@ -9,8 +9,6 @@ Moira (Fan) Zhang · [moirazhang.com](https://moirazhang.com)
 |---|---|---|
 | ![Bozeman, progress 0](docs/screenshots/Bozeman_dissolve_0.png) | ![Bozeman, progress 0.5](docs/screenshots/Bozeman_dissolve_0_5.png) | ![Bozeman, progress 1](docs/screenshots/Bozeman_dissolve_1.png) |
 
-Video: [VIDEO]
-
 ---
 
 ## System
@@ -76,7 +74,7 @@ Everything runs on one MacBook Pro over localhost. The browser runs fullscreen i
 
 Each site's point cloud was made from satellite imagery using Apple's ml-sharp monocular view synthesis to estimate depth and write PLY, then cleaned per site. The PLY files are about 66 MB each and are not in this repo.
 
-Download: [PLY_DOWNLOAD] → put them in `models/`.
+They are available on request; place them in `models/` to run the installation.
 
 Sites: Minneapolis MN, Lemmon SD, Bozeman MT, Klamath Lake OR, Mendocino County CA (plus Red River Valley and Grangeville, used in testing).
 
